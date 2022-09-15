@@ -1,11 +1,11 @@
-<%
-String nomeEmpresa = (String)request.getAttribute("empresa");
-System.out.println(nomeEmpresa);
-
-%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
 <html>
-	<body>
-		Empresa <%= nomeEmpresa %> cadastrada com sucesso!
-		</body>
-		</html>
+<body>
+	Empresa
+	${empresa }
+	cadastrada com sucesso!
+</body>
+</html>
