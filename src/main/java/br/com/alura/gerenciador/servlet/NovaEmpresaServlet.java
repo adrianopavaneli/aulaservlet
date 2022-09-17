@@ -13,32 +13,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.coyote.Request;
-
 /**
  * Servlet implementation class NovaEmpresaServlet
  */
 @WebServlet("/novaEmpresa")
 public class NovaEmpresaServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		System.out.println("Cadastrando nova empresa");
 		
-		
-		System.out.println("Cadastrando nova empresa!");
 		String nomeEmpresa = request.getParameter("nome");
-		String dataEmpresa = request.getParameter("data");
-		Date dataAbertura = null;
+		String paramDataEmpresa = request.getParameter("data");
 		
+		Date dataAbertura = null;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			dataAbertura = sdf.parse(dataEmpresa);
+			dataAbertura = sdf.parse(paramDataEmpresa);
 		} catch (ParseException e) {
 			throw new ServletException(e);
-			
 		}
 		
 		Empresa empresa = new Empresa();
@@ -48,15 +43,14 @@ public class NovaEmpresaServlet extends HttpServlet {
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
 		
+		request.setAttribute("empresa", empresa.getNome());
 		
 		response.sendRedirect("listaEmpresas");
 		
-		//chamar jsp
-		
+//		//chamar o JSP ou Servlet
 //		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
 //		request.setAttribute("empresa", empresa.getNome());
 //		rd.forward(request, response);
-		
 	}
 
 }
