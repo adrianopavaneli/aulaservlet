@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.alura.gerenciador.modelo.Banco;
 import br.com.alura.gerenciador.modelo.Empresa;
 
-public class AlteraEmpresa {
+public class AlteraEmpresa  implements Acao{
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
 		
-		System.out.println("Acao Alterando nova empresa" + id);	
+		System.out.println("acao altera empresa " + id);
 		
 		Date dataAbertura = null;
 		try {
@@ -30,15 +30,13 @@ public class AlteraEmpresa {
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-		System.out.println(id);
 		
 		Banco banco = new Banco();
-		Empresa empresa = banco.buscaEmpresaPorId(id);
+		Empresa empresa = banco.buscaEmpresaPelaId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(dataAbertura);
 		
 		return "redirect:entrada?acao=ListaEmpresas";
-		
+	
 	}
-
 }

@@ -9,10 +9,11 @@
 </head>
 <body>
 
-	<form action="${linkEntradaServlet}" method="post">
+	<form action="${linkEntradaServlet }" method="post">
 	
 		Nome: <input type="text" name="nome"  />
 		Data Abertura: <input type="text" name="data"  />
+		
 		<input type="hidden" name="acao" value="NovaEmpresa">
 	
 		<input type="submit" />
